@@ -28,7 +28,13 @@ public class Company {
        return stock.getAll();
     }
 
-    public Company blackFriday() {
-        return this;
+    public  Company blackFriday() {
+            stock.blackfriday();
+            return this;
+    }
+
+    public String salesHistory() {
+
+        return stock.saleshistory();
     }
 }

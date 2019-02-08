@@ -1,5 +1,6 @@
 package com.indev.blackfriday;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -11,7 +12,7 @@ import static org.junit.Assert.assertThat;
     The company can sell a given product at a fixed quantity and have a price sale margin of 20%
     In black friday, the company is selling two times the usual quantity (10 instead of 5) but have only a price sale margin of 10%
  */
-public class BlackFriday {
+public class BlackFridayTest {
 
     /*
         Total assets is the total of money owned by the company
@@ -64,6 +65,22 @@ public class BlackFriday {
         salePrice = company.sells("machine");
         assertThat(salePrice, is(600f));
         assertThat(company.totalAssets(), is(622));
+    }
+    @Test
+    public void sellsWithProxy() {
+        Company company = new Company();
+        company.stock(10, "capsule", 2);
+        float salePrice = company.sells("capsule");
+        assertThat(salePrice, is(12f));
+
+        assertThat(company.salesHistory(), CoreMatchers.equalTo("5:capsules"));
+
+        salePrice = company.sells("capsule");
+        assertThat(salePrice, is(12f));
+
+        assertThat(company.salesHistory(), CoreMatchers.equalTo("10:capsules"));
+
+        assertThat(company.totalAssets(), is(24));
     }
 
     @Test(expected = RuntimeException.class)

@@ -21,9 +21,11 @@ public class Stock {
 
             if(diffrence != 0){
                 result = result+ produit.getSaledTotal();
-                result= result+ (produit.getRestquantity() * produit.getPrice());
 
+                result= result + (produit.getRestquantity() * produit.getPrice());
+                System.out.println("result 1 "+produit.getRestquantity());
             }else{
+                System.out.println("result 2 "+result);
                 result = result + (produit.getPrice() * produit.getQuantity()) ;
             }
     }
@@ -37,7 +39,23 @@ public class Stock {
               result =  produit.sales5product();
             }
         }
+        if(result == -1){
+            throw new RuntimeException();
+        }
         return  result;
+    }
+    public String saleshistory(){
+        String result ="";
+        for (Product p : Products){
+            result=result+p.History();
+        }
+        return  result;
+    }
+    public void blackfriday(){
+        for (Product p : Products){
+            p.setSalenum(10);
+        }
+
     }
 
 }

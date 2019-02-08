@@ -7,6 +7,9 @@ public class Product {
     private int quantity;
     private int restquantity;
     private int saledTotal;
+    private String salesHistory;
+    private int salenum=5;
+    private int salespercent=20;
 
     public Product(int productQuantity ,String productName ,int productPrice){
         name= productName;
@@ -35,16 +38,33 @@ public class Product {
         return saledTotal;
     }
 
-    public int sales5product(){
-        int result=0;
-        if(quantity%5==0){
-            result = 5 * price;
-            result = result + (result * 20/100);
+    public void setSalenum(int salenum) {
+        this.salenum = salenum;
+    }
 
-            restquantity=restquantity-5;
+    public int sales5product(){
+        int result=0;System.out.println(salenum);
+
+        if(quantity%salenum==0 && restquantity!=0){
+
+            if(salenum==10){
+                salespercent=10;
+
+            }
+            result = salenum * price;
+            result = result + (result * salespercent/100);
+
+            restquantity=restquantity-salenum;
+        }else {
+            return -1;
         }
         saledTotal += result;
         return result;
+    }
+    public String History(){
+        int salesnum = quantity - restquantity;
+        salesHistory = salesnum+":"+name+"s";
+        return salesHistory;
     }
 
 
