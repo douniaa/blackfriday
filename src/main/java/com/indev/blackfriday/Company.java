@@ -1,11 +1,18 @@
 package com.indev.blackfriday;
 
 public class Company {
+
+    private Stock stock;
+    public Company(){
+        stock = new Stock();
+    }
     public float sells(String capsule) {
-        return 0;
+        return stock.salesone(capsule);
     }
 
-    public void stock(int i, String capsule, int i1) {
+    public void stock(int quantity, String name, int price) {
+
+        stock.addProduct(new Product(quantity,name,price));
 
     }
 
@@ -18,7 +25,7 @@ public class Company {
     }
 
     public int totalAssets() {
-        return 20;
+       return stock.getAll();
     }
 
     public Company blackFriday() {
